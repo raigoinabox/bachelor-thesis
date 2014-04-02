@@ -1,0 +1,46 @@
+Since, PyWikiBot is a framework and not a library, all of the code is under the pywikibot folder. In it is another pywikibot folder and the analyse folder. In the pywikibot folder is all of the code for the PyWikiBot framework and under the analyse folder is the code written for this paper.
+
+In the analyse folder, the main module is designed to be the interface between the user and the bot. The other modules are libraries for the main module. In the config module is the configuration variables for the program. \emph{There is the relative path of the file to keep the results of the training and the relative path to hold to list of found good pages.}
+
+In the model module is the PageModel class. PageModel encapsulates a wiki Page and is the data structure for a page in this project. PageModel has a function to return a page data that is understandable and easily calculable with for the analyser train function. It also has the property, which will return the label to which the Page belongs to. For training the label is preset, but for finding, the label is predicted.
+
+\subsubsection{Machine learning}
+The analyser module is the code specific to the machine learning. It has three functions meant to be used outside the module. The \verb;train; function will take a list of \verb;PageModel;s and save the result in a training result file. The \verb;predict; function will take a \verb;PageModel; and return whether the \verb;PageModel;'s label is \verb;GOOD; or \verb;AVERAGE;. This project implemented logistic regression for prediction and training.
+
+The learning data consists of a set of pages that were hand picked by the Vikipeedia team that were considered good pages. The good pages in our set get the label \verb;GOOD;. Then the program asks for the same amount of random pages which will get the label \verb;AVERAGE;. Most likely the \verb;AVERAGE; set will have both really good articles and really bad articles besides average articles. Over large numbers, however, it will average out and produce good results. Those two sets are added together and shuffled. Then 70\% of it will be used to train the program and 30\% will be used to test and let the user know the precision of the bot.
+
+Each page has 7 features: the text of the page, the pages that refer this page, the pages that this page links to, the images this page links to, the external links this page has, the templates this page links to and the categories this page is in. To keep the model simple, the algorithm uses only the count of each feature. These 7 features with a prefix of the number 1 make up the vector x.
+
+To keep the number of iterations small, The values of x are normalised before they are trained or predicted with. It helps keep all the values of x around the same size and around the 0 value. The bias prefix 1 is added after the normalisation so it wouldn't be normalised. This all happens in the \verb;prepare_x; function.
+
+The result y is the numerical value of the label of the page. If it was a good page, y = 1. If the page was average, then y = -1. The program calculates the probability that y = 1 with the given x vector.
+
+For the function implementing the gradient descent, I am using the source's example function with slight modifications:
+\begin{verbatim}
+def gradient_descent(z, y, w_h=None, eta=1.0, max_iterations=10000, epsilon=0.001):
+    if w_h == None:
+        w_h = np.array([0.0 for i in range(z.shape[1])])
+    
+    # save a history of the weight vectors into an array
+    w_h_i = [np.copy(w_h)]
+    
+    for i in range(max_iterations):
+        subset_indices = range(z.shape[0])
+        # subset_indices = np.random.permutation(z.shape[0])[:N/8] # uncomment for stochastic gradient descent
+        
+        grad_E_in = np.mean(np.tile(- y[subset_indices] /
+                                        ( 1.0 + np.exp(y[subset_indices] * w_h.dot(z[subset_indices].T)) ),
+                                    (z.shape[1], 1)).T * 
+                            z[subset_indices], axis=0)
+        
+        w_h -= eta * grad_E_in
+        w_h_i.append(np.copy(w_h))
+        
+        if np.linalg.norm(grad_E_in) <= np.linalg.norm(w_h) * epsilon:
+            break
+    
+    return np.array(w_h_i)
+\end{verbatim}
+
+\subsubsection{Searching}
+The bot finds the good pages using a brute force mechanism. It requests all the pages from wikipedia and then tries to predict whether the page is good or average. It skips all pages with exceptions, mostly that would be redirects.

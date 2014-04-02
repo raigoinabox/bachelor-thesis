@@ -1,0 +1,103 @@
+\documentclass[12pt, a4paper, titlepage, draft]{article}
+
+\usepackage{mystyle}
+\usepackage[nottoc]{tocbibind}
+
+\begin{document}
+
+\include{tex/title}
+
+\begin{abstract}
+[Here you should briefly describe the aims of your work]
+[Here you should briefly describe the main problems dealt with]
+[Here you should briefly describe the main results obtained]
+
+The thesis is in [language] and contains [pages] pages of text, [chapters]
+chapters, [figures] figures, [tables] tables., etc.
+\end{abstract}
+
+\listoffigures
+\listoftables
+\tableofcontents
+\newpage
+
+\section*{Sissejuhatus}
+\addcontentsline{toc}{section}{Sissejuhatus}
+
+\include{tex/theory}
+\include{tex/technology}
+\include{tex/analyser}
+
+\section*{Kokkuvõte}
+\addcontentsline{toc}{section}{Kokkuvõte}
+[Kirjelda lühidalt töö põhieesmärke]
+[Kirjelda olulisemaid tulemusi]
+[Too välja olulisemad järeldused (2(3)]
+[Esita võimalikke edasiarendusi (vajadusel)]
+
+\section*{Summary}
+\addcontentsline{toc}{section}{Summary}
+[Selgita ülevaatlikult ja põhjalikult oma töö eesmärke] 
+[Selgita ülevaatlikult ja piisava põhjalikkusega oma töös käsitletud probleeme]
+[Kirjelda ülevaatlikult ja põhjalikult oma töö tulemusi ja järeldusi]
+
+\begin{thebibliography}{99}
+\bibitem{python-popularity}
+\url{http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html} –
+pythoni populaarsus
+\bibitem{}
+\url{http://python.org/about/}
+\bibitem{}
+\url{http://books.google.ee/books?id=3JfE7TGUwvgC&pg=PT100&redir_esc=y#v=onepage&q&f=false}
+\bibitem{}
+\url{http://www.mediawiki.org/wiki/Manual:What_is_MediaWiki%3F}
+\bibitem{}
+\url{http://www.jguru.com/faq/view.jsp?EID=81}
+\bibitem{}
+\url{http://coding.smashingmagazine.com/2013/04/18/introduction-to-programming-type-systems/}
+\bibitem{}
+\url{http://page.mi.fu-berlin.de/prechelt/Biblio/jccpprt2_advances2003.pdf}
+\bibitem{}
+\url{http://www.python.org/dev/peps/pep-0020/}
+\bibitem{}
+\url{http://docs.python.org/2/faq/general.html#why-was-python-created-in-the-first-place}
+\bibitem{}
+\url{http://docs.oracle.com/javase/tutorial/java/concepts/} - object-orientatsioon
+\bibitem{}
+\url{http://benchmarksgame.alioth.debian.org/u64q/python.php} – pythoni kiirus
+\bibitem{}
+\url{http://me.veekun.com/blog/2011/04/24/gotcha-python-scoping-closures/}
+\bibitem{}
+\url{http://rz.scale-it.pl/2012/12/17/the_python_condition__why_pypy_is_the_future_of_python.html}
+\bibitem{}
+\url{http://blog.irukado.org/2013/06/on-the-virtues-of-pypy-as-your-default-interpreter/}
+\bibitem{}
+\url{http://speed.pypy.org/}
+\bibitem{}
+\url{http://ironpython.codeplex.com/wikipage?title=IronPython\%20Performance} - IronPython
+\bibitem{}
+\url{http://c2.com/cgi/wiki} – kas see sobib allikana?
+\bibitem{}
+\url{http://rl337.org/2012/07/03/gradient-descent-and-normalized-data/} - data normalisation
+\bibitem{}
+\url{http://nbviewer.ipython.org/gist/vietjtnguyen/6655020} – logistical regression
+\bibitem{}
+\url{http://homes.soic.indiana.edu/classes/spring2012/csci/b553-hauserk/gradient_descent.pdf} – line search – Kas ma implementeerin seda oma süsteemis?
+\bibitem{}
+\url{http://www.mediawiki.org/wiki/Manual:Installation_requirements} – MediaWiki Installation requirements
+\bibitem{}
+\url{http://www.mediawiki.org/wiki/Api.php} – MediaWiki API õpetus
+\bibitem{}
+\url{http://www.json.org/} - JSON guide
+\bibitem{}
+\url{http://docs.python.org/2/glossary.html}
+\bibitem{}
+\url{http://stackoverflow.com/questions/8675490/why-does-jited-code-consume-so-much-more-memory-than-either-compiled-or-interpr} – JIT a memory hog
+\bibitem{}
+\url{http://bmanolov.free.fr/javaprotection.php} – Access protection Modifiers
+\end{thebibliography}
+
+\section*{Lisa 1}
+\addcontentsline{toc}{section}{Lisa 1}
+
+\end{document}

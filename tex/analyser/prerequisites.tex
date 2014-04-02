@@ -1,0 +1,67 @@
+\emph{The author used Ubuntu 13.04-13.10 to make this program and hasn't tested installing and running it on other systems. Proceed on your own caution.}
+
+\emph{I switched to arch so I should test and document setting it up for arch.}
+
+This project requires the Python 2 interpreter on the system. Python 3 is not possible, because PyWikiBot doesn't support it. One can install it with the terminal command \verb;sudo apt-get install python2;. The Python library numpy is also necessary to be installed. One can use the command \verb;sudo apt-get install python-numpy;.
+
+A user-config.py configuration file must also exist. To generate it, there is a script in the pywikibot folder. It's named \verb;generate_user_files.py; and and it must be run with the Python interpreter. This is a sample installation process:
+\begin{verbatim}
+project-directory/pywikibot$ python generate_user_files.py
+
+Your default user directory is "~/.pywikibot" 
+How to proceed? ([K]eep [c]hange) 
+Do you want to copy user files from an existing pywikipedia installation? No 
+Create user-config.py file? Required for running bots ([y]es, [N]o) y 
+1: anarchopedia 
+2: battlestarwiki 
+3: commons 
+4: fon 
+5: gentoo 
+6: i18n 
+7: incubator 
+8: lockwiki 
+9: lyricwiki 
+10: mediawiki 
+11: meta 
+12: mywiki 
+13: oldwikivoyage 
+14: omegawiki 
+15: osm 
+16: southernapproach 
+17: species 
+18: strategy 
+19: test 
+20: testviki 
+21: vikidia 
+22: wikia 
+23: wikibooks 
+24: wikidata 
+25: wikimedia 
+26: wikinews 
+27: wikipedia 
+28: wikiquote 
+29: wikisource 
+30: wikitech 
+31: wikiversity 
+32: wikivoyage 
+33: wiktionary 
+34: wowwiki 
+Select family of sites we are working on, just enter the number not name (default: wikipedia): 
+This is the list of known language(s): 
+ab ace af ak als am an ang ar arc arz as ast av ay az ba bar bat-smg bcl be be-x-old bg bh bi bjn bm bn bo bpy br bs bug bxr ca cbk-zam cdo ce ceb ch chr chy ckb co cr crh cs csb cu cv cy da de diq dsb dv dz ee el eml en eo es et eu ext fa ff fi fiu-vro fj fo fr frp frr fur fy ga gag gan gd gl glk gn got gu gv ha hak haw he hi hif hr hsb ht hu hy ia id ie ig ik ilo io is it iu ja jbo jv ka kaa kab kbd kg ki kk kl km kn ko koi krc ks ksh ku kv kw ky la lad lb lbe lez lg li lij lmo ln lo lt ltg lv map-bms mdf mg mhr mi min mk ml mn mr mrj ms mt mwl my myv mzn na nah nap nds nds-nl ne new nl nn no nov nrm nso nv ny oc om or os pa pag pam pap pcd pdc pfl pi pih pl pms pnb pnt ps pt qu rm rmy rn ro roa-rup roa-tara ru rue rw sa sah sc scn sco sd se sg sh si simple sk sl sm sn so sq sr srn ss st stq su sv sw szl ta te tet tg th ti tk tl tn to tpi tr ts tt tum tw ty tyv udm ug uk ur uz ve vec vep vi vls vo wa war wo wuu xal xh xmf yi yo za zea zh zh-classical zh-min-nan zh-yue zu 
+The language code of the site we're working on (default: 'en'): et 
+Username (et wikipedia): Analysebot 
+Which variant of user_config.py: 
+[S]mall or [E]xtended (with further information)? S 
+Do you want to add any other projects? (y/N) 
+'~/.pywikibot/user-config.py' written. 
+Create user-fixes.py file? Optional and for advanced users ([y]es, [N]o)
+\end{verbatim}
+Whenever there seems to be a question, but no answer, it is because the default
+one was correct and pressing enter without an answer selects the default answer.
+Often the default answer is marked by being upper case. In the real
+installation process the tilde signs would actually be written out user home
+directories. It was changed in this paper for generalisation. Also the username
+of the bot will be different for installations.
+
+Before the user can use the bot in any way, the bot needs to be trained for the first time with the train command. The bot expects a training file to exist, which will be created at the time of training the bot. One can do that with the command \verb;python main.py train;.
