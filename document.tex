@@ -1,10 +1,12 @@
-\documentclass[12pt, a4paper, titlepage, draft]{article}
+\documentclass[12pt, a4paper, titlepage]{article}
 
 \usepackage{mystyle}
 \usepackage[nottoc]{tocbibind}
+\usepackage{graphicx}
+
+\graphicspath{ {img/} }
 
 \begin{document}
-
 \include{tex/title}
 
 \begin{abstract}
@@ -17,6 +19,8 @@ chapters, [figures] figures, [tables] tables., etc.
 \end{abstract}
 
 \listoffigures
+\newpage
+
 \listoftables
 \tableofcontents
 \newpage
@@ -41,10 +45,13 @@ chapters, [figures] figures, [tables] tables., etc.
 [Selgita ülevaatlikult ja piisava põhjalikkusega oma töös käsitletud probleeme]
 [Kirjelda ülevaatlikult ja põhjalikult oma töö tulemusi ja järeldusi]
 
+% Every bititem{} mean, that that concrete source is unused in the document
+% and therefore should be deleted or citated
+
 \begin{thebibliography}{99}
 \bibitem{python-popularity}
-\url{http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html} –
-pythoni populaarsus
+Python popularity,
+\url{http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html}
 \bibitem{}
 \url{http://python.org/about/}
 \bibitem{}
@@ -62,9 +69,11 @@ pythoni populaarsus
 \bibitem{}
 \url{http://docs.python.org/2/faq/general.html#why-was-python-created-in-the-first-place}
 \bibitem{}
-\url{http://docs.oracle.com/javase/tutorial/java/concepts/} - object-orientatsioon
+Object-orientation,
+\url{http://docs.oracle.com/javase/tutorial/java/concepts/}
 \bibitem{}
-\url{http://benchmarksgame.alioth.debian.org/u64q/python.php} – pythoni kiirus
+Python speed,
+\url{http://benchmarksgame.alioth.debian.org/u64q/python.php}
 \bibitem{}
 \url{http://me.veekun.com/blog/2011/04/24/gotcha-python-scoping-closures/}
 \bibitem{}
@@ -72,29 +81,42 @@ pythoni populaarsus
 \bibitem{}
 \url{http://blog.irukado.org/2013/06/on-the-virtues-of-pypy-as-your-default-interpreter/}
 \bibitem{}
+Pypy speed,
 \url{http://speed.pypy.org/}
 \bibitem{}
-\url{http://ironpython.codeplex.com/wikipage?title=IronPython\%20Performance} - IronPython
+IronPython,
+\url{http://ironpython.codeplex.com/wikipage?title=IronPython%20Performance}
 \bibitem{}
-\url{http://c2.com/cgi/wiki} – kas see sobib allikana?
+\emph{Ma lisaksin selle lisa allikana minu teadmistele, aga see asi ei ole vist
+kuskil tsiteeritav},
+\url{http://c2.com/cgi/wiki}
 \bibitem{}
-\url{http://rl337.org/2012/07/03/gradient-descent-and-normalized-data/} - data normalisation
+Data normalisation,
+\url{http://rl337.org/2012/07/03/gradient-descent-and-normalized-data/}
+\bibitem{logistic-regression}
+Logistic regression,
+\url{http://nbviewer.ipython.org/gist/vietjtnguyen/6655020}
 \bibitem{}
-\url{http://nbviewer.ipython.org/gist/vietjtnguyen/6655020} – logistical regression
+Võimalik lisa lahendus: 
+Line Search, 
+\url{http://homes.soic.indiana.edu/classes/spring2012/csci/b553-hauserk/gradient_descent.pdf}
 \bibitem{}
-\url{http://homes.soic.indiana.edu/classes/spring2012/csci/b553-hauserk/gradient_descent.pdf} – line search – Kas ma implementeerin seda oma süsteemis?
+MediaWiki Installation requirements,
+\url{http://www.mediawiki.org/wiki/Manual:Installation_requirements}
 \bibitem{}
-\url{http://www.mediawiki.org/wiki/Manual:Installation_requirements} – MediaWiki Installation requirements
+MediaWiki API õpetus,
+\url{http://www.mediawiki.org/wiki/Api.php}
 \bibitem{}
-\url{http://www.mediawiki.org/wiki/Api.php} – MediaWiki API õpetus
-\bibitem{}
-\url{http://www.json.org/} - JSON guide
-\bibitem{}
+JSON guide,
+\url{http://www.json.org/}
+\bibitem{python-glossary}
 \url{http://docs.python.org/2/glossary.html}
-\bibitem{}
-\url{http://stackoverflow.com/questions/8675490/why-does-jited-code-consume-so-much-more-memory-than-either-compiled-or-interpr} – JIT a memory hog
-\bibitem{}
-\url{http://bmanolov.free.fr/javaprotection.php} – Access protection Modifiers
+\bibitem{jit-memory}
+\url{http://stackoverflow.com/questions/8675490/why-does-jited-code-consume-so-much-more-memory-than-either-compiled-or-interpr}
+\bibitem{access-modifiers}
+\url{http://bmanolov.free.fr/javaprotection.php}
+\bibitem{persistent-struct}
+\url{http://www.cs.cmu.edu/~rwh/theses/okasaki.pdf}
 \end{thebibliography}
 
 \section*{Lisa 1}

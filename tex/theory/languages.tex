@@ -2,7 +2,13 @@ Programming language is a formal language with a set of rules about how the comp
 
 Since a programming language is only a set of rules, it needs an implementation. An implementation is a program that evaluates the syntax into machine actions. There are usually multiple ways to implement this. The most direct approach is to use interpretation, which parses the source code and performs the instructions directly. A second approach is to compile the program, which translates the source code into machine code and optimises it, and then run it. It is also possibe to compile a language into another language and then run from that language's implementation. A compiled program will usually run faster, because the program can be heavily optimised, but compiling the program may take some time. This disadvantage doesn't usually reach the user, because the programmer compiles the program before  publishing the machine code to the user. The user can then choose the right file for its computer architecture. Compiling to a lower language has the advantage that the work of adapting for different processor architectures and optimising is already done, but it is possible to compile to a too general source code, which leads to less optimisations.
 
-A third approach is to use just-in-time (JIT) compilation. JIT takes a hybrid approach between running it raw and compiling. While running the program, the JIT compiler will observe what parts of the program are most often run and will compile those parts. Because the analysation is fairly complex and runs parallel to the execution of the program, JIT compilers take a lot more memory[25]. The advantages are that the first operations start immediately and long programs still run almost as efficiently as a precompiled program. The disadvantages are the high memory usage and sudden pauses in the program execution while the necessary part is being compiled.
+A third approach is to use just-in-time (JIT) compilation. JIT takes a hybrid
+approach between running it raw and compiling. While running the program, the
+JIT compiler will observe what parts of the program are most often run and will
+compile those parts. Because the analysation is fairly complex and runs parallel
+to the execution of the program, JIT compilers take a lot more
+memory.\cite{jit-memory} The advantages are that the first operations start
+immediately and long programs still run almost as efficiently as a precompiled program. The disadvantages are the high memory usage and sudden pauses in the program execution while the necessary part is being compiled.
 Programming languages are usually divided into two categories: high level languages and low level languages. The difference is that low level languages are designed more around how the computer works, while high level languages are designed more around the productivity of the programmer. Because high level languages need to do more translation between what the programmer wants and what the computer accepts, they are usually slower than low level languages. Another advantage of lower level languages is that they enable the programmer to have better access to specific operations and more understanding how the program is executed. This is very useful when the main goal is optimisation.
 
 Another way to divide programming languages is static and dynamic programming languages. A programming language is considered static if it uses static typing. Static typing means that the type of a variable is determined prior to the execution of the program. This way the program doesn't have to check the type of a variable at the time of the execution and, therefore, can run faster. Dynamic typing holds the advantage that a variable can hold different types of values at different times and that types can be changed at runtime.
@@ -15,7 +21,17 @@ Procedural programming is a subset of imperative programming. Procedural program
 \subsubsection{Object-oriented programming}
 Object-oriented programming is another subset of imperative programming. Object-oriented programming tries to divide the program into objects that communicate with each other. Each object has fields and methods. Fields and methods are similar to variables and procedures, but they are tied to the object. Fields are considered to be the objects inner state and methods are considered to be the object's behaviour or object's interface.
 
-The goal of object-oriented programming is encapsulation. Encapsulation means that each object has an inner state, inner behaviour and an interface for other objects to use. An outer object doesn't need to know what is happening within the object. It only needs to know how the object is going to react to an interface procedure. Access protection modifiers are generally employed to better enforce this behaviour. These modifiers are usually tied to a method or field and they describe what other methods are allowed to access these methods or fields. Right to access a field means the right to read or change the field and right to access a method means the right to run the method[26]. An object's methods always have access to its objects fields.
+The goal of object-oriented programming is encapsulation. Encapsulation means
+that each object has an inner state, inner behaviour and an interface for other
+objects to use. An outer object doesn't need to know what is happening within
+the object. It only needs to know how the object is going to react to an
+interface procedure. Access protection modifiers are generally employed to
+better enforce this behaviour. These modifiers are usually tied to a method or
+field and they describe what other methods are allowed to access these methods
+or fields. Right to access a field means the right to read or change the field
+and right to access a method means the right to run the
+method.\cite{access-modifiers}
+An object's methods always have access to its objects fields.
 
 An object can inherit another object. The inheriting object is called subobject and the inherited object is called the superobject. The subobject gets the superobject's fields and methods. A copy of the superobject is created and retained in the subobject. When searching for the subobject's methods or fields and they are not found then the superobject is searched for the field or method. A subobject doesn't automatically have access to the superobject's private fields and methods. The subobject can override the superobject's public methods. The type signature of the method cannot change, but the content or the action of the method is changed.
 

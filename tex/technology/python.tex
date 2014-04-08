@@ -1,14 +1,44 @@
 In this project I used Python version 2.7.
 
-ILLUSTRATION 2: Python popularity over time compared to other languages
+%\usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[height=565pt]{tiobe}
+  \caption[Python popularity]{Popularity of python compared to other languages}
+  \label{python-popularity}
+\end{center}
+\end{figure}
 
-Python is a widely-used, general-purpose programming language. Python focuses on human readability, simplicity and power of the programmer. It is most likely best expressed by the fact that Python uses indentation to divide its blocks. A language like C uses the curly braces for that and uses the indentation only for clarity of reading. Python, however, forces the programmer to make the program more readable and standardised. Semantically Python is very flexible. It supports functional, object-oriented and procedural programming styles.
-To minimise clutter in the language, Python uses dynamic typing, also called duck typing. Duck typing doesn't check if an object implements some certain interface, but simply tries to call or use the method or attribute. The principle is „If it looks like a duck and quacks like a duck, it must be a duck.“[24]. This makes it possible to not use interfaces and generics in the code.
-Python has two running modes: the interactive mode and the script mode. The interactive mode is a read-eval-print loop. It reads the user supplied expression and parses it into a data structure, evaluates it and prints the result. An expression can't be multiline and must return only one value. Evaluating a value will return that value and evaluating a variable returns the contents of the variable. The script running mode is similar to the interactive mode, but instead of the user, the expressions are taken from a file and when the end of the file is reached, the interpreter terminates.
+Python is a widely-used, general-purpose programming language as shown in
+figure \ref{python-popularity}.
+Python focuses on human readability, simplicity and power of the programmer. It is most likely
+best expressed by the fact that Python uses indentation to divide its blocks. A
+language like C uses the curly braces for that and uses the indentation only for
+clarity of reading. Python, however, forces the programmer to make the program
+more readable and standardised. Semantically Python is very flexible. It
+supports functional, object-oriented and procedural programming styles.
+
+To minimise clutter in the language, Python uses dynamic typing, also called
+duck typing. Duck typing doesn't check if an object implements some certain
+interface, but simply tries to call or use the method or attribute. The
+principle is ``If it looks like a duck and quacks like a duck, it must be a
+duck''.\cite[duck-typing]{python-glossary} This makes it possible to not use
+interfaces and generics in the code.
+
+Python has two running modes: the interactive mode and the script mode. The
+interactive mode is a read-eval-print loop. It reads the user supplied
+expression and parses it into a data structure, evaluates it and prints the
+result. An expression can't be multiline and must return only one value.
+Evaluating a value will return that value and evaluating a variable returns the
+contents of the variable. The script running mode is similar to the interactive
+mode, but instead of the user, the expressions are taken from a file and when
+the end of the file is reached, the interpreter terminates.
 
 \subsubsection{Procedural style}
 Each file in python is a module with the same name as the filename, except without the \texttt{.py} extension. Each module can import another module or every object in another modules namespace with the \texttt{import} command. When the import command is evaluated, the whole file is evaluated once. A directory can also be a module if it contains a \texttt{\_\_init\_\_.py} file. In that case the module is initialised with the \texttt{\_\_init\_\_.py} file and it's namespace contains the file modules in the directory.
+
 Procedures in Python are called functions, because they can return one or multiple values, however if a return value isn't specified, it returns the \texttt{None} value. Python uses pass by reference so that values inside the object can be changed. However one must still be careful that changing the reference itself won't change the reference in the caller. Also even though numbers are objects and therefore are passed by reference, they are immutable and one can't change their inner value. That makes them in essence pass by value.
+
 The closest feature that gets to a C style stucture is the named tuple. A named tuple is a factory function that will create and return a class. A tuple is an immutable list. The inputs of the function are the class name, the fields of the class and more optional parameters. The returned class inherits from the tuple type and only accepts the previously entered fields. An example:
 
 \begin{verbatim}
