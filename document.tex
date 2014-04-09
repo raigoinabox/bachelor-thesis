@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper, titlepage]{article}
+\documentclass[a4paper, titlepage, 12pt]{article}
 
 \usepackage{mystyle}
 \usepackage[nottoc]{tocbibind}
@@ -48,10 +48,10 @@ chapters, [figures] figures, [tables] tables., etc.
 % Every bititem{} mean, that that concrete source is unused in the document
 % and therefore should be deleted or citated
 
+\bibliographystyle{plain}
+\bibliography{loputoo}
+
 \begin{thebibliography}{99}
-\bibitem{python-popularity}
-Python popularity,
-\url{http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html}
 \bibitem{}
 \url{http://python.org/about/}
 \bibitem{}
@@ -111,8 +111,6 @@ JSON guide,
 \url{http://www.json.org/}
 \bibitem{python-glossary}
 \url{http://docs.python.org/2/glossary.html}
-\bibitem{jit-memory}
-\url{http://stackoverflow.com/questions/8675490/why-does-jited-code-consume-so-much-more-memory-than-either-compiled-or-interpr}
 \bibitem{access-modifiers}
 \url{http://bmanolov.free.fr/javaprotection.php}
 \bibitem{persistent-struct}

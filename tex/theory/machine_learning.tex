@@ -7,8 +7,10 @@ Similar to another supervised learning algorithm linear regression, logistic
 regression is a linear model.``All linear models make use of a "signal" $s$
 which is a linear combination of the input vector $\mathbf{x}$ components
 weighed by the corresponding components in a weight vector
-$\mathbf{w}$.''\cite{logistic-regression} \[\mathbf{w} =
-[\begin{array}{cccc} w_0 & w_1 & \ldots & w_d \end{array} ]^T \] \[s = w_0 + w_1 x_1 + \cdots + w_d x_d = \sum_{i=0}^d w_i x_i = \mathbf{w} \cdot \mathbf{x} = \mathbf{w}^T \mathbf{x}\] Linear regression will use the signal directly as output, but logistic regression will pass the signal through a sigmoid or logistic function and treat thats output as the probability that $y=1$.
+$\mathbf{w}$.''\cite{logistic-regression}
+\[\mathbf{w} = \left[\begin{array}{cccc} w_0 & w_1 & \ldots & w_d \end{array}
+\right]^T \] \[s = w_0 + w_1 x_1 + \cdots + w_d x_d = \sum_{i=0}^d w_i x_i =
+\mathbf{w} \cdot \mathbf{x} = \mathbf{w}^T \mathbf{x}\] Linear regression will use the signal directly as output, but logistic regression will pass the signal through a sigmoid or logistic function and treat thats output as the probability that $y=1$.
 \[h(\mathbf{x}) = \theta(s)\]
 \[\theta(s) = \frac{e^s}{1+e^s} = \frac{1}{1 + e^{-s}}\]
 
