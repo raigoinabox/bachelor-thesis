@@ -6,6 +6,18 @@ The HTTP response also splits into a header and content. Inside the content is u
 
 Often the tags in HTML aren't enough. For that there is JavaScript (JS). JavaScript is a dynamic general-purpose programming language. JavaScript works by registering a JavaScript function with an HTML event, so that when that event is fired, that JavaScript function is run. JavaScript interacts with the user by changing the current HTML the user is seeing. Because JavaScript is a general-purpose programming language, unlike HTML, any arbitrary calculation is possible. JavaScript uses Asynchronous JavaScript and XML (AJAX) to send HTTP requests to outside servers. Despite the name, the returned format doesn't have to be XML.
 
-HTML pages are purely intended for browsers to parse and a human to see. For an another application to get data from a HTML page, it has to web scrape. Web scraping is observing beforehand how a web page is built and later filtering out the necessary data from the HTML. Another way is for the server to offer an Application Programming Interface (API). An API is a way for a program to get data from the server with a HTTP requst in a more formal and machine-friendly form. There are multiple formats for getting the data: JavaSrict Object Notation (JSON), a Domain specific XML and so on.
+HTML pages are purely intended for browsers to parse and a human to see. For an
+another application to get data from a HTML page, it has to web scrape. Web
+scraping is observing beforehand how a web page is built and later filtering out
+the necessary data from the HTML. Another way is for the server to offer an
+Application Programming Interface (API). An API is a way for a program to get
+data from the server with a HTTP requst in a more formal and machine-friendly
+form. There are multiple formats for getting the data: JavaSrict Object Notation
+(JSON), a Domain specific XML and so on.
 
-With JSON the HTTP content is one legal JavaScript Object, which makes it easy to read into JavaScript. Another advantage of it over XML is that there is basic type checking. Javascript allows a value to have a few different types with different notations: a string, a number, another object, an array; and the three constant values \texttt{true}, \texttt{false}, \texttt{null}.
+With JSON the HTTP content is one legal JavaScript Object, which makes it easy
+to read into JavaScript. Another advantage of it over XML is that there is basic
+type checking. Javascript allows a value to have a few different types with
+different notations: a string, a number, another object, an array; and the three
+constant values \verb;true;, \verb;false;,
+\verb;null;.\cite{website:json-guide,website:json}

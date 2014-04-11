@@ -1,12 +1,28 @@
-A wiki page is a page that owns a title in that wiki and is supposed to aggregate information on the world wide web about the subject of the title. Most of the content in the wiki pages are created or changed by the users of the wiki. MediaWiki is software for a content-classification wiki. A content classification wiki forbids writing personal knowledge and opinions on the wiki page and only allows writing information that can be referenced. MediaWiki has a separarate web page for discussion on a wiki page.
+A wiki page is a page that owns a title in that wiki and is supposed to
+aggregate information on the world wide web about the subject of the title. Most
+of the content in the wiki pages are created or changed by the users of the
+wiki. MediaWiki is software for a content-classification wiki. A content
+classification wiki forbids writing personal knowledge and opinions on the wiki
+page and only allows writing information that can be referenced. MediaWiki has a
+separarate web page for discussion on a wiki page.\cite{wiki:mediawiki-about}
 
 An interwiki link is a link that refers to another wiki page in the same wiki. This way wikis don't have to duplicate information on different pages and just refer to an another page. Links that link to outside the wiki are called external links. Usually external links are in the page as references. There is a special type of wiki page that are called templates. They are not meant to aggregate information, but that to act as a form template. Whenever a page links to a template, it expands to form a part of the page it is linked on.
 
-MediaWiki has 3 core dependencies. It is completely written in php, therefore it needs php on the system it is running on. It also needs to run on a http server like Apache that is also configured to have php enabled and index.php as a root file. Running MediaWiki is an act of putting the MediaWiki directory in the http server root directory and pointing the browser to the MediaWiki directory. MediaWiki also needs a database service. Officially it supports MySQL 5.0.2+, MariaDB 5.1+, PostgreSQL 8.1+, SQLite 3 and Oracle.
+MediaWiki has 3 core dependencies. It is completely written in php, therefore it
+needs php on the system it is running on. It also needs to run on a http server
+like Apache that is also configured to have php enabled and index.php as a root
+file. Running MediaWiki is an act of putting the MediaWiki directory in the http
+server root directory and pointing the browser to the MediaWiki directory.
+MediaWiki also needs a database service. Officially it supports MySQL 5.0.2+,
+MariaDB 5.1+, PostgreSQL 8.1+, SQLite 3 and Oracle.\cite{wiki:mediawiki-installation-requirements}
 
 The first time MediaWiki is run, the user is guided through an installation process which will install the database in the database service and create a config file that must be placed in the MediaWiki root directory.
 
-MediaWiki also has an API that exposes the MediaWiki articles to bots without the need to screen scrape. For that in the MediaWiki root directory is the file api.php. Queries made at api.php with the right query parameters will return bot friendly results. For example:
+MediaWiki also has an API that exposes the MediaWiki articles to bots without
+the need to screen scrape. For that in the MediaWiki root directory is the file
+api.php. Queries made at api.php with the right query parameters will return bot
+friendly results.\cite{website:mediawiki-api} For example:
+
 \url{http://en.wikipedia.org/w/api.php?format=json&action=query&titles=Main%20Page&prop=revisions&rvprop=content}
 
 The format parameter tells what format the bot wants the data to be in. Each format also has a version with a fm added to the end. The fm version pretty-prints what the bot would have seen in html so it is easy for the programmer to debug with the browser. Different possible formats include json, xml, serialized php, wddx and yaml, where xmlfm is the default. However json is the recommended format and all the other formats are deprecated.
