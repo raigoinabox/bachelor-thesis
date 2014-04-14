@@ -1,37 +1,53 @@
 Programming language is a formal language with a set of rules about how the
-computer should behave. The syntax of the language is usually considered the
-grammar of the language. For example, if there is a syntax problem in the
-program, the computer doesn't understand the command and stops. The semantics of
-the language is considered to be the vocabulary and meaning of the language. If
-there is a semantical problem, then the program is valid and understandable to
-the computer, but it is not what the programmer wished to happen. The program
-will react rather unpredictably. Syntactic sugar is a feature that the
-programmer can easily implement it in the language and is there for the
-convenience.\cite{website:syntax-semantics}
+computer should behave. Programming languages usually have syntax and semantics.
+The syntax of the language is usually considered the grammar of the language.
+For example, if there is a syntax problem in the program, the computer doesn't
+understand the command and stops. The semantics of the language is considered to
+be the vocabulary and meaning of the language. If there is a semantical problem,
+then the program is valid and understandable to the computer, but it is not what
+the programmer wished to happen. The program will react rather unpredictably.
+Syntactic sugar is a feature that the programmer can easily implement it in the
+language and is there for the convenience.\cite{website:syntax-semantics}
 
-Since a programming language is only a set of rules, it needs an implementation.
-An implementation is a program that evaluates the syntax into machine actions.
-There are usually multiple ways to implement this. The most direct approach is
-to use interpretation, which parses the source code and performs the
-instructions directly. A second approach is to compile the program, which
-translates the source code into machine code and optimises it, and then run it.
-It is also possibe to compile a language into another language and then run from
-that language's implementation. A compiled program will usually run faster,
-because the program can be heavily optimised, but compiling the program may take
-some time. This disadvantage doesn't usually reach the user, because the
-programmer compiles the program before  publishing the machine code to the user.
-The user can then choose the right file for its computer architecture. Compiling
-to a lower language has the advantage that the work of adapting for different
-processor architectures and optimising is already done, but it is possible to
-compile to a too general source code, which leads to less optimisations.
+A programming language by itself is not useful. It also needs an implementation.
+An implementation is a program that evaluates the syntax of the program into
+machine actions. There are 3 ways to create an implementation:
+\begin{description}
+  \item[Interpretation] Interpretation parses the source code and performs the
+  instructions directly
+  \item[Compilation] Compilation is transforming the current source code into a
+  another format that can then be interpreted. Compiled language can also
+  compile into another compiled language which will compile that into another
+  language and so on.
+  \item[just-in-time (JIT) compilation] JIT takes a hybrid approach of
+  interpretation and compilation. While interpreting the program, the JIT
+  compiler will observe what parts of the program are most often interpreted and
+  will compile those parts.
+\end{description}
+Generally the compiling phase is called the compile time and the interpretation
+phase is called the runtime. Compiled languages are usually considered fastest,
+because compilation can heavily optimise the programmer's code, which leads to
+a faster runtime. Interpretation however is faster and easier to use for the
+programmer because it is a one step process instead of the two step process. For
+this reason interpreted languages are usually used for scripting. JIT
+implementations are usually as easy to use as interpreted implementations, but
+are a lot faster. However because the analysation is fairly complex and runs
+parallel to the execution of the program, JIT compilers take a lot more
+memory.\cite{website:jit-memory}
 
-A third approach is to use just-in-time (JIT) compilation. JIT takes a hybrid
-approach between running it raw and compiling. While running the program, the
-JIT compiler will observe what parts of the program are most often run and will
-compile those parts. Because the analysation is fairly complex and runs parallel
-to the execution of the program, JIT compilers take a lot more
-memory.\cite{website:jit-memory} The advantages are that the first operations start
-immediately and long programs still run almost as efficiently as a precompiled program. The disadvantages are the high memory usage and sudden pauses in the program execution while the necessary part is being compiled.
+% TODO Talk about a program being a sequence of commands.
+
+Any sufficiently complex program or programming language needs to hold and
+manipulate data. Because holding and manipulating only bits and bytes is
+uncomfortable and prone to errors, more abstraction is required. Dividing the
+data into different types will help with ease of use and early detection of
+errors. A type is the upper bound of a range of values that a variable can
+assume. In a typed language a variable can be given a nontrivial type while in
+untyped languages a variable is not limited to a type. Strongly checked
+languages will give an error in case of mistyping and weakly checked languages
+will not check for such errors and might produce type-related bugs. Statically
+checked languages check for type errors during compile time and dynamically
+checked languages will check during the runtime.\cite{cardelli96}
 
 Programming languages are usually divided into two categories: high level
 languages and low level languages. The difference is that low level languages
@@ -44,27 +60,14 @@ better access to specific operations and more understanding how the program is
 executed. This is very useful when the main goal is
 optimisation.\cite{website:scripting-languages}
 
-% TODO
-TODO Push types above the comparison of languages.
-
-Another way to divide programming languages is static and dynamic programming
-languages. A programming language is considered static if it uses static typing.
-Static typing means that the type of a variable is determined prior to the
-execution of the program. This way the program doesn't have to check the type of
-a variable at the time of the execution and, therefore, can run faster. Dynamic
-typing holds the advantage that a variable can hold different types of values at
-different times and that types can be changed at runtime.\cite{website:types}
-
-% TODO
-TODO Divide the above chapter  into static typing vs duck typing and strong
-typing vs weak typing.
-
 \subsubsection{Procedural programming}
+
 Imperative programming is a style of programming with the philosophy of changing the machine's state to the required state, which could be a file in a hard drive or a video on the screen. For that the computer executes a sequence of operations in order, which are specified by the programmer. An operation is some change of state in the computer or calculation of some data.
 
 Procedural programming is a subset of imperative programming. Procedural programming tries to divide the program into variables, data structures and procedures. Procedures are meant to group together abstract operations so they could be reused in different situations. In this case an operation can also be a procedure. Data structures are meant to group together conjoined data so they could be moved and manipulated more easily. Variables are pointers to data. They point to the location of the data in the memory which can be then easily retrieved.
 
 \subsubsection{Object-oriented programming}
+
 Object-oriented programming is another subset of imperative programming.
 Object-oriented programming tries to divide the program into objects that
 communicate with each other. Each object has fields and methods. Fields and
