@@ -1,0 +1,53 @@
+\subsubsection{Implementation}
+
+A programming language by itself is not useful. It also needs an implementation.
+An implementation is a program that evaluates the syntax of the program into
+machine actions. There are 3 ways to create an implementation:
+\begin{description}
+  \item[Interpretation] Interpretation parses the source code and performs the
+  instructions directly
+  \item[Compilation] Compilation is transforming the current source code into a
+  another format that can then be interpreted. Compiled language can also
+  compile into another compiled language which will compile that into another
+  language and so on.
+  \item[just-in-time (JIT) compilation] JIT takes a hybrid approach of
+  interpretation and compilation. While interpreting the program, the JIT
+  compiler will observe what parts of the program are most often interpreted and
+  will compile those parts.
+\end{description}
+Generally the compiling phase is called the compile time and the interpretation
+phase is called the runtime. Compiled languages are usually considered fastest,
+because compilation can heavily optimise the programmer's code, which leads to
+a faster runtime. Interpretation however is faster and easier to use for the
+programmer because the compilation step is skipped. For this reason interpreted
+languages are usually used for scripting. JIT implementations are usually as easy to use as interpreted implementations, but
+are a lot faster. However because the analysation is fairly complex and runs
+parallel to the execution of the program, JIT compilers take a lot more
+memory.\cite{website:jit-memory}
+
+The official implementation of Python is CPython. Every formal change to the
+language will be almost immediately mirrored in this implementation. It will be
+supported for a long time will be the most current and up-to-date compared to
+other implementations. CPython is a bytecode interpreter. It compiles to an
+intermediate bytecode, which it then interprets. It compiles every time the
+source file has been changed. This implementation is slow compared to
+other languages\cite{website:python-speed}, but enables hooking the script to a
+C module. Since the C programming language is fast,\cite{website:c-vs-python} it
+is possible to write most of the program in Python and write the bottlenecks in
+C.
+
+The most popular alternative implementation to CPython is \pypy. \pypy{} is a JIT
+compiler written in Python. It is popular because of its speed. As of \today,
+\pypy{} is about 6.2~times faster than pure
+CPython.\cite{website:python-pypy-speed} There are two disadvantages: \pypy{}
+doesn't have hooks into C and PyPy isn't as up-to-date as CPython. As of \today,
+Python 3 support for \pypy is in the beta state while CPython supports Python
+3.4.0. Also since PyPy doesn't have hooks into C, it can't speed up the
+bottlenecks of a program. With simple calculation from
+\cite{website:c-vs-python,website:python-pypy-speed}, C gcc is still about 3
+times faster than PyPy.
+
+There are also Jython and IronPython. Jython compiles down to Java bytecode. It
+allows the programmer to use libraries from Java in his project. IronPython is
+the same principle, only it compiles to the .NET bytecode. That gives IronPython
+projects access to .NET libraries.

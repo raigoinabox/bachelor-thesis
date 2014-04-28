@@ -1,0 +1,88 @@
+% TODO [15:42.04] Jaagup Irve: aga üldisest konkreetsemaks on narratiivi parem
+% jälgida [15:42.43] Jaagup Irve: ja pigem keskendu keerulise kirjeldamisele mahu mõttes
+% [15:42.50] Jaagup Irve: triviaalsusi pikalt seletada pole mõtet ka
+% [15:43.14] Raigo Aljand: Okei, seega ühendamine toimub lihtsalt niimoodi, et
+% varem kirjutatud tehnoloogia lõigud sisestan kuhugi teooria ossa.
+% [15:43.31] Raigo Aljand: Mis oleks keeruline.
+% [15:53.50] Jaagup Irve: jaota u. sedasi et valdkonnad on eraldi üldisest
+% konkreetseks [15:54.19] Jaagup Irve: üldstruktuuri saad selgitada sissejuhatuses
+
+\subsection{Programming language}
+
+Programming language is a formal language with a set of rules about how the
+computer should behave. Programming languages usually have syntax and semantics.
+The syntax of the language is usually considered the grammar of the language.
+For example, if there is a syntax problem in the program, the computer doesn't
+understand the command and stops. The semantics of the language is considered to
+be the vocabulary and meaning of the language. If there is a semantical problem,
+then the program is valid and understandable to the computer, but it is not what
+the programmer wished to happen. The program will react rather unpredictably.
+Syntactic sugar is a feature that the programmer can easily implement it in the
+language and is there for the convenience.\cite{website:syntax-semantics}
+
+Any sufficiently complex program or programming language needs to hold and
+manipulate data. Because holding and manipulating only bits and bytes is
+uncomfortable and prone to errors, more abstraction is required. Dividing the
+data into different types will help with ease of use and early detection of
+errors. A type is the upper bound of a range of values that a variable can
+assume. In a typed language a variable can be given a nontrivial type while in
+untyped languages a variable is not limited to a type. Strongly checked
+languages will give an error in case of mistyping and weakly checked languages
+will not check for such errors and might produce type-related bugs. Statically
+checked languages check for type errors during compile time and dynamically
+checked languages will check during the runtime.\cite{cardelli96}
+
+Programming languages are usually divided into two categories: high level
+languages and low level languages. The difference is that low level languages
+are designed more around how the computer works, while high level languages are
+designed more around the productivity of the programmer. Because high level
+languages need to do more translation between what the programmer wants and what
+the computer accepts, they are usually slower than low level languages. Another
+advantage of lower level languages is that they enable the programmer to have
+better access to specific operations and more understanding how the program is
+executed. This is very useful when the main goal is
+optimisation.\cite{website:scripting-languages}
+
+Python is a widely-used, general-purpose programming language as shown in figure
+\ref{python-popularity}. Python focuses on human readability, simplicity and
+power to the
+programmer.\cite{website:python-zen,website:python-faq-creation-reason} That
+fact is most likely best expressed by the fact that Python uses indentation to
+divide its blocks. A language like C uses the curly braces for that and uses the
+indentation only for clarity of reading. Python, however, forces the programmer
+to make the program more readable and standardised. Semantically Python is very
+flexible. It supports functional, object-oriented and procedural programming
+styles.
+
+% \usepackage{graphics} is needed for \includegraphics
+\begin{figure}[htp]
+\begin{center}
+  \includegraphics[height=564pt]{tiobe}
+  \caption[Python popularity]{Popularity of python compared to other
+  languages\cite{website:tiobe-index}}
+  \label{python-popularity}
+\end{center}
+\end{figure}
+
+Python uses dynamic typing, also called duck typing. Duck typing doesn't check
+if an object implements some certain interface, but simply tries to call the
+method or attribute. The principle is ``If it looks like a duck and quacks like
+a duck, it must be a duck''.\cite[duck-typing]{website:python-glossary} This
+method of type checking renders interfaces useless. 
+
+% FIXME This is incorrect. The difference is marginal.
+
+Python has two running modes: the interactive mode and the script mode. The
+interactive mode is a read-eval-print loop. It reads the user supplied
+expression and parses it into a data structure, evaluates it and prints the
+result. An expression can't be multiline and must return only one value.
+Evaluating a value will return that value and evaluating a variable returns the
+contents of the variable. The script running mode is similar to the interactive
+mode, but instead of the user, the expressions are taken from a file and when
+the end of the file is reached, the interpreter terminates.
+
+\input{tex/tools/python/imperative}
+
+\input{tex/tools/python/functional}
+
+\input{tex/tools/python/implementation}

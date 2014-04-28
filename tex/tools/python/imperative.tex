@@ -1,0 +1,183 @@
+\subsubsection{Imperative programming}
+
+Imperative programming is a style of programming with the philosophy of changing the machine's state to the required state, which could be a file in a hard drive or a video on the screen. For that the computer executes a sequence of operations in order, which are specified by the programmer. An operation is some change of state in the computer or calculation of some data.
+
+\paragraph{Procedural programming}
+
+Procedural programming is a subset of imperative programming. Procedural
+programming tries to divide the program into variables, data structures and
+procedures. Procedures are meant to group together abstract operations so they
+could be reused in different situations. In this case an operation can also be a
+procedure. Data structures are meant to group together conjoined data so they
+could be moved and manipulated more easily. Variables are pointers to data. They
+point to the location of the data in the memory which can be then easily
+retrieved.
+
+Python procedures look like this:
+\begin{verbatim}
+>>> def fib(n):    # write Fibonacci series up to n
+...     """Print a Fibonacci series up to n."""
+...     a, b = 0, 1
+...     while a < n:
+...         print a,
+...         a, b = b, a+b
+...
+>>> # Now call the function we just defined:
+... fib(2000)
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
+\end{verbatim}
+\begin{quote}
+``The keyword def introduces a function definition. It must be followed by the
+function name and the parenthesized list of formal parameters. The statements
+that form the body of the function start at the next line, and must be
+indented.''\cite[4.6. Defining Functions]{website:python-functions}
+\end{quote}
+Python doesn't make a comparison between functions and procedures.
+
+Each file in python is a module with the same name as the filename, except without the \texttt{.py} extension. Each module can import another module or every object in another modules namespace with the \texttt{import} command. When the import command is evaluated, the whole file is evaluated once. A directory can also be a module if it contains a \texttt{\_\_init\_\_.py} file. In that case the module is initialised with the \texttt{\_\_init\_\_.py} file and it's namespace contains the file modules in the directory.
+
+Procedures in Python are called functions, because they can return one or multiple values, however if a return value isn't specified, it returns the \texttt{None} value. Python uses pass by reference so that values inside the object can be changed. However one must still be careful that changing the reference itself won't change the reference in the caller. Also even though numbers are objects and therefore are passed by reference, they are immutable and one can't change their inner value. That makes them in essence pass by value.
+
+The closest feature that gets to a C style stucture is the named tuple. A named tuple is a factory function that will create and return a class. A tuple is an immutable list. The inputs of the function are the class name, the fields of the class and more optional parameters. The returned class inherits from the tuple type and only accepts the previously entered fields. An example:
+
+% FIXME this should be somewhere more down.
+
+\begin{verbatim}
+>>> Point = namedtuple('Point', ['x', 'y'], verbose=True)
+class Point(tuple):
+    'Point(x, y)'
+
+    __slots__ = ()
+
+    _fields = ('x', 'y')
+
+    def __new__(_cls, x, y):
+        'Create a new instance of Point(x, y)'
+        return _tuple.__new__(_cls, (x, y))
+
+    @classmethod
+    def _make(cls, iterable, new=tuple.__new__, len=len):
+        'Make a new Point object from a sequence or iterable'
+        result = new(cls, iterable)
+        if len(result) != 2:
+            raise TypeError('Expected 2 arguments, got %d' % len(result))
+        return result
+
+    def __repr__(self):
+        'Return a nicely formatted representation string'
+        return 'Point(x=%r, y=%r)' % self
+
+    def _asdict(self):
+        'Return a new OrderedDict which maps field names to their values'
+        return OrderedDict(zip(self._fields, self))
+
+    def _replace(_self, **kwds):
+        'Return a new Point object replacing specified fields with new values'
+        result = _self._make(map(kwds.pop, ('x', 'y'), _self))
+        if kwds:
+            raise ValueError('Got unexpected field names: %r' % kwds.keys())
+        return result
+
+    def __getnewargs__(self):
+        'Return self as a plain tuple.   Used by copy and pickle.'
+        return tuple(self)
+
+    __dict__ = _property(_asdict)
+
+    def __getstate__(self):
+        'Exclude the OrderedDict from pickling'
+        pass
+
+    x = _property(_itemgetter(0), doc='Alias for field number 0')
+
+    y = _property(_itemgetter(1), doc='Alias for field number 1')
+
+
+>>> p = Point(11, y=22)     # instantiate with positional or keyword arguments
+>>> p[0] + p[1]             # indexable like the plain tuple (11, 22)
+33
+>>> x, y = p                # unpack like a regular tuple
+>>> x, y
+(11, 22)
+>>> p.x + p.y               # fields also accessible by name
+33
+>>> p                       # readable __repr__ with a name=value style
+Point(x=11, y=22)
+\end{verbatim}
+
+If a variable is nonlocal and the variable in the function is only read, then
+the interpreter will try to find it from a nonlocal context. However, if the
+variable is given new value anywhere in the function, the interpreter will
+assume that the variable is local and the global variable will not be visible.
+One can make a variable global with the \texttt{global} command. The syntax is
+\texttt{global variable}. After that, every reference to the variable will be a
+reference to the global variable.
+
+\paragraph{Object-oriented programming}
+
+Object-oriented programming is another subset of imperative programming.
+Object-oriented programming tries to divide the program into objects that
+communicate with each other. Each object has fields and methods. Fields and
+methods are similar to variables and procedures, but they are tied to the
+object. Fields are considered to be the objects inner state and methods are
+considered to be the object's behaviour or object's
+interface.\cite{website:object-orientation}
+
+The goal of object-oriented programming is encapsulation. Encapsulation means
+that each object has an inner state, inner behaviour and an interface for other
+objects to use. An outer object doesn't need to know what is happening within
+the object. It only needs to know how the object is going to react to an
+interface procedure. Access protection modifiers are generally employed to
+better enforce this behaviour. These modifiers are usually tied to a method or
+field and they describe what other methods are allowed to access these methods
+or fields. Right to access a field means the right to read or change the field
+and right to access a method means the right to run the
+method. An object's methods always have access to its objects
+fields.\cite{website:access-modifiers}
+
+An object can inherit another object. The inheriting object is called subobject and the inherited object is called the superobject. The subobject gets the superobject's fields and methods. A copy of the superobject is created and retained in the subobject. When searching for the subobject's methods or fields and they are not found then the superobject is searched for the field or method. A subobject doesn't automatically have access to the superobject's private fields and methods. The subobject can override the superobject's public methods. The type signature of the method cannot change, but the content or the action of the method is changed.
+
+Class-based programming separates the object into the class and the instance.
+The class is an abstraction and the classification of the object while the
+instance is a actual object with actual data. Usually the class holds the
+behaviour of the object, which includes the constructor. The constructor is a
+special method, that is called when a new instance is being created from the
+object. Inheritance works by remembering the inheritance line and then searching
+for the methods in the right class.
+
+An interface is a a class that has no fields and all its methods are public. All
+of the methods are abstract methods, meaning that the methods have no content or
+implementation. A class can usually implement multiple interfaces but inherit
+from only one class. One can't make a instance of an interface, there needs to
+be an implementing class. An abstract class is a class that has atleast one
+abstract method. Similar to interfaces, it is impossible to make an instance of
+them. However they are still classes and and they are inherited, not
+implemented.
+
+Python has a class-based object-oriented style. Python, however, is more dynamic than a normal static class-based language like Java. After an object has been created from a class, one can still change that concrete object's variables and methods. Every property is also public. Properties, that the programmer considers private, are usually prefixed with underscores. Each statement is evaluated top to bottom. If there are multiple properties with the same name, then the last evaluated property is remembered.
+\begin{verbatim}
+class MyClass:
+    """A simple example class"""
+    i = 12345
+    def f(self):
+        return 'hello world'
+\end{verbatim}
+In Python, methods are functions, that get the object's instance in the first parameter, but are called with the first parameter ignored, like this: \verb;my_object.f();. If there are brackets after the class name and another class's name inside the brackets, the class inherits from the class in the bracket. A method can access the superclass with the \verb;super; function. The super function takes two arguments: the type of the class of whose the super is being searched for and the second is the object.
+
+Multiple inheritance is supported by putting multiple class names in the
+brackets supported by comas. If called for a property, that a object doesn't
+have, the environment will try to find the property from the first named
+superclass recursively until it hits object class and then the next superclass
+recursively and so on. The object class is the superclass of every class. If
+there are no brackets or the brackets are empty, then the object class is an
+implicit superclass.
+
+% TODO cite this.
+
+Prototype-based programming is more used by dynamic languages. It keeps the
+design of the language minimal by having no wrappers around objects and their
+attributes. An object is created by creating an empty object or by cloning an
+existing object. Inheritance works by cloning an existing object and the subtype
+can replace the old attributes or add new attributes. Abstract objects are
+objects that will hold only behaviour by containing only constant or default
+attributes.

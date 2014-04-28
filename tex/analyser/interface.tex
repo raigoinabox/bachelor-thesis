@@ -1,3 +1,13 @@
-This project is run through the Command Line Interface. The user will find the file to run in the pywikibot/analyse folder. The file is called main.py and it needs to be run in the python environment with the command \verb;python main.py;. After the running command the user can add subsequent commands for the program to do different tasks, for example \verb;python main.py train;. The \verb;train; command will either train the program for the first time or will retrain the program if the for example the wiki has been updated. Then it will test the algorithm and give the user the accuracy of the algorithm.
+This project is run through the Command Line Interface. The user will find the
+file to run in the core folder. The file is called \verb;analyse-wiki.py; and it
+needs to be run with the command \verb;./analyse-wiki.py;. The default behaviour
+of the script is to retrain the machine learning algorithm and filter the good
+pages from all of Vikipeedia. The command can also take one argument. If the
+argument is \verb;train;, then the command will only retrain the machine
+learning algorithm. If the argument is \verb;find;, the command will only search
+for good pages using the result of the last retraining. 
 
-The \verb;find; command will find all the good articles in the current wiki. This command will take a long time because the bot will have to go through the whole wiki to check every page. \emph{Kas ma lisan ka nime järgi filtreerimise, et aega vähendada?} It will then write the list of good pages in a file named \verb;good_pages.pkl; using the Python library \verb;pickle; and print it out on the terminal. \emph{Kas ma teen midagi muud selle listiga?}
+After the bot has found all of the good pages, it will then write the list of
+good pages in a file named \verb;good_pages.pkl; using the Python library
+\verb;pickle; and print it out on the terminal. \emph{Kas ma teen midagi muud
+selle listiga?}

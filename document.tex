@@ -1,5 +1,9 @@
 \documentclass[a4paper, titlepage, 12pt]{article}
 
+% XXX sa saad kaitsmisel nalja teha kui tahad ja märkida, et kuigi wikipedia
+% viiteid ei loeta heaks tooniks, ei õnnestunud sul tööd ilma teha, sest nende API on
+% paraku wikis kirjeldatud
+
 \usepackage{mystyle}
 \usepackage[nottoc]{tocbibind}
 \usepackage{graphicx}
@@ -7,6 +11,8 @@
 \graphicspath{ {img/} }
 
 \DeclareUnicodeCharacter{00A0}{ }
+
+\newcommand{\pypy}{PyPy}
 
 \begin{document}
 \include{tex/title}
@@ -30,8 +36,8 @@ chapters, [figures] figures, [tables] tables., etc.
 \section*{Sissejuhatus}
 \addcontentsline{toc}{section}{Sissejuhatus}
 
-\include{tex/theory}
-\include{tex/technology}
+\include{tex/tools}
+
 \include{tex/analyser}
 
 \section*{Kokkuvõte}
@@ -46,9 +52,6 @@ chapters, [figures] figures, [tables] tables., etc.
 [Selgita ülevaatlikult ja põhjalikult oma töö eesmärke] 
 [Selgita ülevaatlikult ja piisava põhjalikkusega oma töös käsitletud probleeme]
 [Kirjelda ülevaatlikult ja põhjalikult oma töö tulemusi ja järeldusi]
-
-% Every bititem{} mean, that that concrete source is unused in the document
-% and therefore should be deleted or citated
 
 \bibliographystyle{plain}
 \bibliography{loputoo}

@@ -1,0 +1,105 @@
+\subsubsection{Functional programming}
+
+Functional programming languages are designed around functions. Programming
+functions are similar to mathematical functions, that it has inputs as
+parameters and returns a value as output. A function should always return the
+same output with the same inputs and the inputs should not be changed inside the
+function. This leads to a particularly stateless form of programming.
+
+Due to the stateless form of this style, functional programming languages
+usually support immutable datastuctures. Instead of updating a datastructure, it
+is copied with the new values replaced and the new datastucture is returned.
+First-class functions and dynamic evaluation of functions are also
+supported.\cite{website:persistent-struct}
+
+Python functions are very similar to Python procedures:
+\begin{verbatim}
+>>> def fib2(n): # return Fibonacci series up to n
+...     """Return a list containing the Fibonacci series
+...     up to n."""
+...     result = []
+...     a, b = 0, 1
+...     while a < n:
+...         result.append(a)    # see below
+...         a, b = b, a+b
+...     return result
+...
+>>> f100 = fib2(100)    # call it
+>>> f100                # write the result
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+\end{verbatim}
+What has changed is that now the results are being collected into a list and
+then the list is returned with the \verb;return;
+keyword.\cite[4.6. Defining Functions]{website:python-functions}
+
+A more functional way of programming would be this:
+\begin{verbatim}
+>>> def fib2(n): # return Fibonacci series up to n
+...     """Return a list containing the Fibonacci series up to n."""
+...     a, b = 0, 1
+...     while a < n:
+...         yield a    # see below
+...         a, b = b, a+b
+... 
+>>> [a for a in fib2(100)]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+\end{verbatim}
+In this example we don't change the list to collect the results, but instead
+\verb;yield; the result. When the function is called, it will instead return a
+generator. A generator is a simple data structure, that is iterable through
+once and is only readable.
+After a generator 
+
+Generator is a data structure to dynamically iterate items. When a function has
+a \texttt{yield} command somewhere inside of the function, when the function is
+evaluated, the function is actually not run, but a generator data structure is
+returned. The \texttt{yield} command is very similar to \texttt{return}, except
+for one difference. When the generator is iterated, for example in a
+\texttt{for} loop, the function is run until a \texttt{yield} command is hit,
+the value is returned and the function is paused. When the next element is
+requested, the function is continued again until the next \texttt{yield}. This
+continues until the function reached the end, which signals that the generator
+has no more elements. The advantage of a generator over a list for example, is
+that lists require that all their elements are in memory at some point, while a generator has only one
+element at a time in memory. Because when using a generator one can iterate over the items only once, there is also a slight speed increase. The disadvantages are that generators have no such data as the length of the iteration, are immutable and can't be iterated over for a second time.
+
+
+\begin{quote}
+``Small anonymous functions can be created with the \verb;lambda; keyword. This
+function returns the sum of its two arguments: \verb;lambda a, b: a+b;. Lambda
+functions can be used wherever function objects are required. They are syntactically restricted to a single expression. Semantically, they are just syntactic sugar for a normal function definition. Like nested function definitions, lambda functions can reference variables from the containing scope:''\cite[4.7.5. Lambda Expressions]{website:python-functions}
+\end{quote}
+\begin{verbatim}
+>>> def make_incrementor(n):
+...     return lambda x: x + n
+...
+>>> f = make_incrementor(42)
+>>> f(0)
+42
+>>> f(1)
+43
+\end{verbatim}
+
+Python has support fot lexical closures, which gives the function a strong
+reference to the namespace. This excludes the possibility that the namespace will be garbage
+collected while the function is still in memory. The function has the guarantee
+that the non-local values will exist even after the enclosing context is deleted
+or garbage collected.\cite{website:python-closures}
+
+Since other functional languages have them, Python also has functions
+\verb;map;, \verb;filter; and \verb;reduce;. \verb;map; applies a function
+to every item in an iterable and returns a new list with the results of the
+function. \verb;filter; applies a function to every item in an iterable and
+returns a new list with the items where the function returned \verb;True;. And \verb;reduce; applies a function for every item in an iterable and returns the value of the last evaluation. In this case the function must have two parameters and the first parameter holds the value from the last evaluation of the function.
+
+A way to avoid using \verb;map; and \verb;filter; is by generator expressions
+and list comprehensions. List comprehensions are a syntactic sugar to easily
+create lists. Unlike \verb;map;, list comprehensions don't need to be supplied a
+function, but can also use arbitrary expressions. A sample list comprehension
+is: \verb;[2 * item for item in iterable if item % 2 == 0];. This expression
+returns a filtered list where each element of iterable is multiplied with 2. The
+returned list contains only elements that were even before. Therefore the syntax
+is
+\verb;[expression for expr1 in sequence1 if condition1 for expr2 in sequence2 if condition2 ...];.
+The commands are nested with the right being inside the left and the first expression being the returned innermost expression. Generator expressions are syntactically same, except normal brackets instead of square brackets are used and they create a generator instead of a
+list.

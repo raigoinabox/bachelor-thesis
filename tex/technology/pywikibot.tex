@@ -1,14 +1,52 @@
-PyWikiBot is a Python framework which allows an application to communicate with a MediaWiki instance through the MediaWiki API. Firstly (IN MY HUMBLE OPINION) the core component of PyWikiBot is the Site object. The site object holds the connection to the MediaWiki instance that PyWikiBot is supposed to query from. It is instantiated without arguments. Instead it takes the instantiation data from the current PyWikiBot configuration.
+PyWikiBot is a Python framework which allows an application to communicate with
+a MediaWiki instance through the MediaWiki API. Firstly the core component of
+PyWikiBot is the Site object. The site object holds the connection to the
+MediaWiki instance that PyWikiBot is supposed to query from. It is instantiated
+without arguments. Instead it takes the instantiation data from the current
+PyWikiBot configuration.
 
-PyWikiBot is configurable with the \verb;user-config.py; file. On a linux system the \verb;user-config.py; file has to be in the directory \verb;~/.pywikibot;. The \verb;user-config.py; file is created with the script \verb;generate_user_files.py;. It will ask the necessary questions and then generate the \verb;user-config.py; file in the necessary location.
+PyWikiBot is configurable with the \verb;user-config.py; file. On a linux system
+the \verb;user-config.py; file has to be in the directory \verb;~/.pywikibot;.
+The \verb;user-config.py; file is created with the script
+\verb;generate_user_files.py;. It will ask the necessary questions and then
+generate the \verb;user-config.py; file in the necessary location.
 
-All bots in Wikipedia should have a user account that the bot is using to query and make changes from. All those user accounts should also be flagged as bots, so the admins can make better informed decisions in case of high load. PyWikiBot follows this principle by not being able to run anonymously. When generating user files, PyWikiBot will ask what will be the user name to run with. When running the bot, PyWikiBot will also ask the user for the password. PyWikiBot will remember the password and it is usually not necessary to write the password in again even after a computer restart.
+All bots in Wikipedia should have a user account that the bot is using to query
+and make changes from. All those user accounts should also be flagged as bots,
+so the admins can make better informed decisions in case of high load. PyWikiBot
+follows this principle by not being able to run anonymously. When generating
+user files, PyWikiBot will ask what will be the user name to run with. When
+running the bot, PyWikiBot will also ask the user for the password. PyWikiBot
+will remember the password and it is usually not necessary to write the password
+in again even after a computer restart.
 
-The site that PyWikiBot will query from is dependent on the family and the language. These two are also asked when generating user files. A family is a group of sites that are grouped together according to some theme. A language is the the 2 character code of the language that the site was written in. The url of the site doesn't have to be \verb;ll.family.tld;, where \verb;ll; is the language and \verb;tld; is the top level domain of the site, like how it is with wikipedia. Each site can have it's own url.
+The site that PyWikiBot will query from is dependent on the family and the
+language. These two are also asked when generating user files. A family is a
+group of sites that are grouped together according to some theme. A language is
+the the 2 character code of the language that the site was written in. The url
+of the site doesn't have to be \verb;ll.family.tld;, where \verb;ll; is the
+language and \verb;tld; is the top level domain of the site, like how it is with
+wikipedia. Each site can have it's own url.
 
 \subsubsection{Page}
-The page object holds data about a single wiki page. A page instantation can have 3 arguments. First is the source from which the page will be loaded. The second is the title of the page. The third is the namespace from which the page is loaded. The first argument is obligatory and the instantiating values depend on it. If the source is an another page, then it will make a copy of the page with the title overridden if it is given. If the source is a site, then it reads the title and namespace argument and creates a link from them. If the source is a link instance then it is remembered and the rest of the arguments are ignored.
+The page object holds data about a single wiki page. A page instantation can
+have 3 arguments. First is the source from which the page will be loaded. The
+second is the title of the page. The third is the namespace from which the page
+is loaded. The first argument is obligatory and the instantiating values depend
+on it. If the source is an another page, then it will make a copy of the page
+with the title overridden if it is given. If the source is a site, then it reads
+the title and namespace argument and creates a link from them. If the source is
+a link instance then it is remembered and the rest of the arguments are ignored.
 
-A link represents a link to a page. A link has 3 instantiation arguments. The first is the text of the link. The second is the site that the link is on. And the third is the namespace to default to if the link text doesn't contain the namespace where the link points to. The text is the only obligatory argument. If no site is given then a new site is initialised. Unless otherwise specified the default namespace will be the main namespace.
+A link represents a link to a page. A link has 3 instantiation arguments. The
+first is the text of the link. The second is the site that the link is on. And
+the third is the namespace to default to if the link text doesn't contain the
+namespace where the link points to. The text is the only obligatory argument. If
+no site is given then a new site is initialised. Unless otherwise specified the
+default namespace will be the main namespace.
 
-Another way to get pages is to use pagegenerators KAS SEE LAHKU EI KIRJUTATA?. These generate pages using the MediaWiki generator API. There is a PyWikiBot pagegenerator for each MediaWiki generator.
+Another way to get pages is to use \verb;PageGenerator;s. A \verb;PageGenerator;
+is a \verb;generator; that queries \verb;Page;s according to a specific
+criteria. For example, the \verb;RandomPageGenerator; generates random pages
+from the Wiki. It uses the MediaWiki generator API. There probably is a
+PyWikiBot \verb;PageGenerator; for each MediaWiki generator.
