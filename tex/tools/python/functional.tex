@@ -35,34 +35,26 @@ keyword.\cite[4.6. Defining Functions]{website:python-functions}
 A more functional way of programming would be this:
 \begin{verbatim}
 >>> def fib2(n): # return Fibonacci series up to n
-...     """Return a list containing the Fibonacci series up to n."""
+...     """Return a list containing the Fibonacci series
+        up to n."""
 ...     a, b = 0, 1
 ...     while a < n:
 ...         yield a    # see below
 ...         a, b = b, a+b
 ... 
->>> [a for a in fib2(100)]
+>>> list(fib2(100))
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 \end{verbatim}
 In this example we don't change the list to collect the results, but instead
-\verb;yield; the result. When the function is called, it will instead return a
-generator. A generator is a simple data structure, that is iterable through
-once and is only readable.
-After a generator 
+\verb;yield; the result. When the function is called, instead of returning a
+final result, it will return a generator. A generator is a simple data
+structure, that is iterable through only once. The \verb;list; function takes an
+iterable and returns a list with the iterable's elements.
 
-Generator is a data structure to dynamically iterate items. When a function has
-a \texttt{yield} command somewhere inside of the function, when the function is
-evaluated, the function is actually not run, but a generator data structure is
-returned. The \texttt{yield} command is very similar to \texttt{return}, except
-for one difference. When the generator is iterated, for example in a
-\texttt{for} loop, the function is run until a \texttt{yield} command is hit,
-the value is returned and the function is paused. When the next element is
-requested, the function is continued again until the next \texttt{yield}. This
-continues until the function reached the end, which signals that the generator
-has no more elements. The advantage of a generator over a list for example, is
-that lists require that all their elements are in memory at some point, while a generator has only one
-element at a time in memory. Because when using a generator one can iterate over the items only once, there is also a slight speed increase. The disadvantages are that generators have no such data as the length of the iteration, are immutable and can't be iterated over for a second time.
-
+A \verb;yield; created generator will evaluate the function until the first
+\verb;yield; keyword, return the result and pause the function. When the next
+element is asked for, the function is continued and return the result of the
+next \verb;yield;. When the end of the function is reached, the generator stops.
 
 \begin{quote}
 ``Small anonymous functions can be created with the \verb;lambda; keyword. This
@@ -80,7 +72,7 @@ functions can be used wherever function objects are required. They are syntactic
 43
 \end{verbatim}
 
-Python has support fot lexical closures, which gives the function a strong
+Python has support for lexical closures, which gives the function a strong
 reference to the namespace. This excludes the possibility that the namespace will be garbage
 collected while the function is still in memory. The function has the guarantee
 that the non-local values will exist even after the enclosing context is deleted
@@ -103,3 +95,114 @@ is
 \verb;[expression for expr1 in sequence1 if condition1 for expr2 in sequence2 if condition2 ...];.
 The commands are nested with the right being inside the left and the first expression being the returned innermost expression. Generator expressions are syntactically same, except normal brackets instead of square brackets are used and they create a generator instead of a
 list.
+
+Functional programming requires immutable data structures. Fot that python has
+tuples and named tuples. A tuple is an immutable data structure, that allows
+packing different data together and afterwards unpack them or access them with
+an index. Tuples are immutable, meaning they can't be changed.
+\begin{verbatim}
+>>> t = 12345, 54321, 'hello!'
+>>> t[0]
+12345
+>>> t
+(12345, 54321, 'hello!')
+>>> # Tuples may be nested:
+... u = t, (1, 2, 3, 4, 5)
+>>> u
+((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
+>>> # Tuples are immutable:
+... t[0] = 88888
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> # but they can contain mutable objects:
+... v = ([1, 2, 3], [3, 2, 1])
+>>> v
+([1, 2, 3], [3, 2, 1])
+\end{verbatim}
+\verb;namedtuple; is a function in the \verb;collections; module that returns a
+class that inherits from the tuple class. Named tuples have all the properties
+of a tuple and add on a couple of things:
+\begin{enumerate}
+  \item The named tuple has a name and a fitting string representation.
+  \item Every field in a named tuple is registered with a name instead of an
+  index.
+\begin{enumerate}
+  \item You can initialise the named tuple with the named tuples.
+  \item You can access the fields of the named tuple by their names.
+  \item You can't construct a named tuple with more or less elements than it
+  expects.
+\end{enumerate}
+\end{enumerate}
+\begin{verbatim}
+>>> Point = namedtuple('Point', ['x', 'y'], verbose=True)
+class Point(tuple):
+    'Point(x, y)'
+
+    __slots__ = ()
+
+    _fields = ('x', 'y')
+
+    def __new__(_cls, x, y):
+        'Create a new instance of Point(x, y)'
+        return _tuple.__new__(_cls, (x, y))
+
+    @classmethod
+    def _make(cls, iterable, new=tuple.__new__, len=len):
+        'Make a new Point object from a sequence or iterable'
+        result = new(cls, iterable)
+        if len(result) != 2:
+            raise TypeError('Expected 2 arguments,
+                            got %d' % len(result))
+        return result
+
+    def __repr__(self):
+        'Return a nicely formatted representation string'
+        return 'Point(x=%r, y=%r)' % self
+
+    def _asdict(self):
+        'Return a new OrderedDict which maps
+        field names to their values'
+        return OrderedDict(zip(self._fields, self))
+
+    def _replace(_self, **kwds):
+        'Return a new Point object
+        replacing specified fields with new values'
+        result = _self._make(map(kwds.pop, ('x', 'y'), _self))
+        if kwds:
+            raise ValueError(
+            'Got unexpected field names: %r' % kwds.keys())
+        return result
+
+    def __getnewargs__(self):
+        'Return self as a plain tuple.
+        Used by copy and pickle.'
+        return tuple(self)
+
+    __dict__ = _property(_asdict)
+
+    def __getstate__(self):
+        'Exclude the OrderedDict from pickling'
+        pass
+
+    x = _property(_itemgetter(0),
+                  doc='Alias for field number 0')
+
+    y = _property(_itemgetter(1),
+                  doc='Alias for field number 1')
+
+
+>>> p = Point(11, y=22)     # instantiate with 
+...                         # positional or keyword arguments
+>>> p[0] + p[1]             # indexable like 
+...                         # the plain tuple (11, 22)
+33
+>>> x, y = p                # unpack like a regular tuple
+>>> x, y
+(11, 22)
+>>> p.x + p.y               # fields also accessible by name
+33
+>>> p                       # readable __repr__ 
+...                         # with a name=value style
+Point(x=11, y=22)
+\end{verbatim}

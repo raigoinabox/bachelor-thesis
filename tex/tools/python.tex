@@ -1,4 +1,4 @@
-% TODO [15:42.04] Jaagup Irve: aga üldisest konkreetsemaks on narratiivi parem
+% XXX [15:42.04] Jaagup Irve: aga üldisest konkreetsemaks on narratiivi parem
 % jälgida [15:42.43] Jaagup Irve: ja pigem keskendu keerulise kirjeldamisele mahu mõttes
 % [15:42.50] Jaagup Irve: triviaalsusi pikalt seletada pole mõtet ka
 % [15:43.14] Raigo Aljand: Okei, seega ühendamine toimub lihtsalt niimoodi, et
@@ -70,16 +70,18 @@ method or attribute. The principle is ``If it looks like a duck and quacks like
 a duck, it must be a duck''.\cite[duck-typing]{website:python-glossary} This
 method of type checking renders interfaces useless. 
 
-% FIXME This is incorrect. The difference is marginal.
+% XXX maybe cite and uncomment?
 
-Python has two running modes: the interactive mode and the script mode. The
-interactive mode is a read-eval-print loop. It reads the user supplied
-expression and parses it into a data structure, evaluates it and prints the
-result. An expression can't be multiline and must return only one value.
-Evaluating a value will return that value and evaluating a variable returns the
-contents of the variable. The script running mode is similar to the interactive
-mode, but instead of the user, the expressions are taken from a file and when
-the end of the file is reached, the interpreter terminates.
+% Python has two running modes: the interactive mode and the script mode. The
+% interactive mode is a read-eval-print loop. It reads the user supplied
+% \emph{expression} and parses it into a data structure, evaluates it and prints
+% the result. An expression can't be multiline and must return only one value.
+% Evaluating a value will return that value, evaluating a variable returns the
+% contents of the variable and evaluating a function will call that function with
+% the arguments and returns the result of the function. The script running mode is
+% similar to the interactive mode, but instead of the user, the expressions are
+% taken from a file and when the end of the file is reached, the interpreter
+% terminates.
 
 \input{tex/tools/python/imperative}
 
