@@ -1,0 +1,67 @@
+\section{Results}
+
+The most significant result is the error rate of prediction. To calculate it,
+when the program collects the pages to train the machine learning algorithm,
+30\% of the pages are randomly selected and separated into a separate set. After the
+training is complete, the algorithm is then asked to calculate the label of each
+page in the test set. The calculated label and the known label are then compared
+and it is possible to tell, whether the calculation was wrong or not.
+If we add up all the wrong predictions, we get the error rate or the prediction
+accuracy.
+
+Since the low-quality pages are just random pages, they might have a bias in any
+feature dimension. However, with big enough sets, the bias will average out.
+Also, because the test pages are also randomly selected, there might be a bias
+in them too. Therefore, the error rate can be varied. Table
+\ref{table:training-results}, however, shows that the variance is generally
+small.
+
+\begin{table}
+\begin{tabulary}{\textwidth}{CCCCCC}
+& Training iterations & Tests & Wrong predictions & Error rate (\%) &
+Runtime (seconds) \\
+\cline{2-6}
+& 766 & 68 & 1 & 1.5 & 26 \\
+& 680 & 68 & 1 & 1.5 & 20 \\
+& 653 & 68 & 3 & 4.4 & 15 \\
+& 645 & 68 & 1 & 1.5 & 22 \\
+& 785 & 68 & 2 & 2.9 & 23 \\
+& 760 & 68 & 1 & 1.5 & 22 \\
+\hline
+Average & 715 & 68 & 1.50 & 2.2 & 21.3 \\
+\hline
+Standard Deviation & 57 & 0 & 0.76 & 1.1 & 3.3
+\end{tabulary}
+\caption{Training results}
+\label{table:training-results}
+\end{table}
+
+Another type of result is the number of iterations of training. The training
+algorithm gradient descent looks for the local minimum or maximum. It iterates
+over the result of the last iteration and makes it more precise. It is possible
+for gradient descent to iterate for a long time or forever, if the required
+precision or the step between iterations is too high. If the number of
+iterations reaches 10000, the algorithm is considered to never finish and throws
+an error. Through trial and error the allowed error rate was fixed at 0.1\% and
+the step size was fixed at 50\%.
+
+The practical use of this algorithm is creating a list of high-quality articles
+for the Vikipeedia editors.
+
+Writing notes:
+
+\begin{itemize}
+  \item ``Most significant'' alguses feels wrong. Feels like ``In my opinion''
+  ehk subjective.
+  \item Esimene lõik, viimane lause: feels treating the reader like a child.
+  \item Teine lõik, esimene lause. Kas ma sõnastan seda ikka õigesti. Neil
+  peakski olema bias olema low-quality teoreetiliselt, aga praktiliselt tahan ma
+  completely average page.
+\end{itemize}
+
+Notes:
+
+\begin{itemize}
+  \item Not going to mention data normlisation here? I figured it's an
+  implementation detail and not a result.
+\end{itemize}

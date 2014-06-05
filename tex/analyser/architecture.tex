@@ -4,7 +4,7 @@ In the pywikibot folder is all of the code for the PyWikiBot framework and in
 the analyse folder is the code written for this paper. The interface script is
 also in the src folder named \verb;wiki-analyse.py;.
 
-Most of the in the analyse code is programmed in a functional style. There are
+Most of the analysis code is programmed in a functional style. There are
 no classes, only named tuples and most functions don't change the inner state of
 the parameters, but return a new value. The only imperative part of the program
 is in the \verb;voidlib.py; file. There each function changes the state of the
@@ -33,39 +33,58 @@ takes in a list of \verb;PageModel; and returns the result of training to them.
 PageModel is a simple datastructure that contains a wiki Page and the label
 assigned to that page.
 
-The \verb;modellib; module contains the
+The \verb;modellib; module contains the \\
 \verb;predicted_label(train_result, page); function, that will return the
 machine's prediction for the Page's label.
 
-The learning data consists of the pages in the category ``Head
-artiklid''\footnote{\url{https://et.wikipedia.org/wiki/Kategooria:Head_artiklid}}
-except for the 5 articles that are tied to the category but are not examples of
-good articles. This category is hand built by the Vikipeedia team. Their
-PageModel is built with the label \verb;GOOD_PAGE;. Then the program asks for
-the same amount of random pages which PageModel is initialised with the label
-\verb;AVERAGE_PAGE;. Most likely the \verb;AVERAGE_PAGE; set will have some
-really good articles and really bad articles besides average articles, but
-hopefully they will not effect the training result. Those two sets are then
-added together and shuffled. Then 70\% of it will be used for training and the
-rest will be used to test the precision of the bot. Sometimes the set the bot is
-trained with may be biased and the user might want to train the bot again.
+The training data consists of the pages in the category ``Head
+artiklid''\footnote{\url{https://et.wikipedia.org/wiki/Kategooria:Head_artiklid}}\footnote{Good
+articles in Estonian} except for the 5 articles that are articles about the
+category itself and are not examples of good articles. This category is hand
+built by the Vikipeedia team. An article must fill multiple requirements before
+it is considered to be good:\cite{wiki:good-article-requirements}
+\begin{description}
+  \item[Well written] It is clearly worded and has the correct
+  spelling. It conforms to the style requirements and doesn't use made-up words
+  or slang.
+  \item[Factually accurate and verifiable] Each paragraph has a citation to used
+  sources and the sources must credible. A good article doesn't contain original
+  research.
+  \item[Covers the whole subject] The main aspects of the subject must be
+  covered while not being derailed to other subjects.
+  \item[Neutral] The subject is presented fairly and without contradiction.
+  \item[Stabile] The article is not often changed because of current
+  arguments or events.
+  \item[Illustrated with pictures if possible] Each picture is marked with
+  copyrights which are not incompatible with Vikipeedia policy. The pictures
+  must be on topic and sufficiently explained. A good article may not have
+  pictures if it is complicated to obtain one.
+\end{description}
 
-% XXX This could change.
+PageModels with the pages from the ``Head artiklid'' category are built with the
+label \verb;GOOD_PAGE;. Then the program asks for the same amount of random
+pages whose PageModel is initialised with the label \verb;AVERAGE_PAGE;. Most
+likely the \verb;AVERAGE_PAGE; set will have some very high-quality articles and
+very low-quality articles besides average articles, but it averages out. Those
+two sets are then added together and shuffled. Then 70\% of it will be used for
+training and the rest will be used to test the precision of the bot. Sometimes
+the set the bot is trained with may be biased and the user might want to train
+the bot again.
 
 Each page has 7 features:
 \begin{enumerate}
   \item Length of the text of the Page.
   \item Number of Pages that refers this Page.
-  \item Number of pages this page links to.
-  \item Number of images this page links to.
+  \item Number of pages this Page links to.
+  \item Number of images this Page links to.
   \item Number of external links this Page contains.  
   \item Number of templates this Page links to.
-  \item Number of categories this page is in.
+  \item Number of categories this Page is in.
 \end{enumerate}
 Common reasoning says that the higher these features are, the better a Page
 would be. However we don't know, how one feature weighs against another
 feature. That's what the machine learning algorithm figures out. These 7
-features with a prefix of the number 1 make up the vector x.
+features with a prefix of the vaule 1 make up the vector x.
 
 To keep the number of iterations small, The values of x are normalised before
 they are trained or predicted with. It helps keep all the values of x around the
@@ -120,4 +139,6 @@ def gradient_descent(z, y, w_h=None, eta=0.5,
 
 \subsubsection{Searching}
 
-The bot finds the good pages using a brute force mechanism. It requests all the pages from wikipedia and then tries to predict whether the page is good or average. It skips all pages with exceptions, mostly that would be redirects.
+The bot finds the good pages using a brute force mechanism. It requests all the
+pages from Wikipedia and then tries to predict whether the page is good or
+average. It skips all pages with exceptions, mostly that would be redirects.

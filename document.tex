@@ -6,72 +6,127 @@
 
 \usepackage{utf8}
 
-%math
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{hyphenat}
+\usepackage{parskip}
+\usepackage[nottoc]{tocbibind}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{tabulary}
+
+\graphicspath{ {img/} }
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-% misc
-\usepackage{hyperref}
-\usepackage{hyphenat}
-\usepackage{parskip}
-
-\usepackage[nottoc]{tocbibind}
-\usepackage{graphicx}
-
-
-\graphicspath{ {img/} }
-
 \DeclareUnicodeCharacter{00A0}{ }
 
-
 \newcommand{\pypy}{PyPy}
-
+\newcommand{\bulletsection}[1]{\section*{#1}
+\addcontentsline{toc}{section}{#1}}
 
 \begin{document}
 \include{tex/title}
 
 \begin{abstract}
-[Here you should briefly describe the aims of your work]
-[Here you should briefly describe the main problems dealt with]
-[Here you should briefly describe the main results obtained]
+The Estonian Wikipedia has a lot of articles that are of high-quality, but are
+hard to find from the huge set of articles. The aim of this
+thesis is to filter out the high-quality articles from the low-quality ones
+using a machine learning algorithm called logistic regression.
 
-The thesis is in [language] and contains [pages] pages of text, [chapters]
-chapters, [figures] figures, [tables] tables., etc.
+The main problem was filtering out the high-quality articles from the
+low-quality articles. An algorithm was written using gradient descent to find
+the logistic regression weights from a matrix of numerical data. Therefore,
+the main tasks of this thesis were to find known high-quality articles and known
+low-quality Wikipedia articles, translate them into numerical data, train the
+machine learning algorithm in a small enough number of iterations and validate
+the accuracy of this algorithm.
+
+Research shows that the Estonian Wikipedia has a category for hand-picked
+high-quality articles and a way to obtain a random article, which will labeled
+as low-quality. Training the algorithm with those results, the accuracy of the
+result is enough to filter out high-quality articles out of all of the Estonian
+Wikipedia.
+
+% TODO Put the right data in.
+The thesis is in English and contains \pageref*{LastPage} pages of text,
+[chapters] chapters, [figures] figures, [tables] tables., etc.
 \end{abstract}
 
-\listoffigures
-\newpage
-
 \listoftables
+\clearpage
+
+\listoffigures
+\clearpage
+
 \tableofcontents
-\newpage
+\clearpage
 
-\section*{Sissejuhatus}
-\addcontentsline{toc}{section}{Sissejuhatus}
-
+\include{tex/introduction}
 \include{tex/tools}
-
 \include{tex/analyser}
+\include{tex/results}
 
-\section*{Kokkuvõte}
-\addcontentsline{toc}{section}{Kokkuvõte}
-[Kirjelda lühidalt töö põhieesmärke]
-[Kirjelda olulisemaid tulemusi]
-[Too välja olulisemad järeldused (2(3)]
-[Esita võimalikke edasiarendusi (vajadusel)]
+\bulletsection{Summary}
+The aim of this thesis is to provide a way to filter out the high-quality
+articles in the Estonian Wikipedia. The best way to do so would be using
+logistic regression, a machine learning algorithm.
 
-\section*{Summary}
-\addcontentsline{toc}{section}{Summary}
-[Selgita ülevaatlikult ja põhjalikult oma töö eesmärke] 
-[Selgita ülevaatlikult ja piisava põhjalikkusega oma töös käsitletud probleeme]
-[Kirjelda ülevaatlikult ja põhjalikult oma töö tulemusi ja järeldusi]
+The Estonian Wikipedia has a hand-picked category for high-quality articles.
+The machine learning algorithm can be trained with these articles. Logistic
+regression has a weight for each feature or dimension of the article. Logistic
+regression is also blind to data type and only sees the scalar value. That
+means that it is impossible to identify whether an article uses a certain kind
+of template or has certain words or characters in it.
+
+An article has 7 features: characters, pages that refer it, pages that it refers
+to, images it refers to, external links it contains, templates it links to,
+categories it is in. These features were selected because they were readily
+available through the PyWikiBot framework. Because logistic regression accepts
+only scalar values, the count of each feature was used. A 8th constant weight is
+added as a prefix to counteract the bias in the data.
+
+An algorithm was written using gradient descent to find the logistic regression
+weights from the matrix of numerical data. Gradient descent is an algorithm to
+calculate the local minimum or maximum of a range of data. In this case, we want
+to find the minimum of the error rate. It iterates over the last result and
+changes it towards the local minimum. The size of the step of each iteration
+must be carefully chosen or the algorithm might step over the local minimum
+without lowering the deviation.
+
+When the data has a great bias or big deviations, gradient descent must go
+through a lot of iterations to negate that. By normalising the data beforehand,
+all the features have the same small bias and deviation. This is also done in
+this thesis, otherwise the iteration count might grow so large, that it is hard
+to differentiate between a forever looping algorithm and an eventually stopping
+algorithm.
+
+Validation is done by setting aside 30\% of the articles gathered for training
+and then comparing the label the algorithm predicted for these articles with
+their true label.
+
+The average error rate of the algorithm detailed in this thesis is 2.22\%. This
+is achieved with averagly 714.8 iterations of gradient descent. This error rate
+can be considered good enough for the purposes of the editors in Vikipeedia.
+
+One possible improvement is not using the PyWikiBot framework. Because of the
+way the PyWikiBot framework's interface works the program queries more times from
+the MediaWiki server than is required. Each article has a summary page about the
+article's metadata, which can be screen scraped to get most of the required
+features with one query. It is also possible to make one specific query through
+the MediaWiki API to get the required metadata.
+
+Another possible improvement is to subjectively separate bad articles
+and use that data to teach the machine learning algorithm. In this thesis
+separating the high-quality articles was done because the high-quality articles
+were already handpicked by the Vikipeedia editors. The logistic regression
+algorithm can also be made to accept multiple classifications instead of 2.
+
+I conclude that it is entirely possible to use machine learning to sift out
+the high-quality articles.
 
 \bibliographystyle{plain}
 \bibliography{loputoo}
-
-\section*{Lisa 1}
-\addcontentsline{toc}{section}{Lisa 1}
 
 \end{document}

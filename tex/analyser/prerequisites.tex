@@ -1,10 +1,10 @@
-\emph{The author used Arch Linux of \today to make this program and hasn't
+\emph{The author used Arch Linux of \today\ to make this program and hasn't
 tested installing and running it on other systems. Proceed on your own caution.}
 
-This project requires the Python 2 interpreter on the system. As of \today
+This project requires the Python 2 interpreter on the system. As of \today\
 PyWikiBot does not support Python 3 and therefore this paper's code was also not
 written in Python 3. The Python library numpy is also necessary.
-One can install them with the terminal command 
+One can install them with the terminal command \\
 \verb;sudo pacman -S --needed python2 python2-numpy;.
 
 A user-config.py configuration file must also exist. To generate it, there is a
@@ -12,12 +12,15 @@ script in the pywikibot folder. It's named \verb;generate_user_files.py; and and
 it must be run with the Python interpreter. This is a sample installation
 process:
 \begin{verbatim}
-raigo@archofraigo ~/git/wiki-analyse-bot/core (git)-[master] % python2 generate_user_files.py                                                                               :(
+raigo@archofraigo ~/git/wiki-analyse-bot/core (git)-[master] % 
+python2 generate_user_files.py                                                                               :(
 
 Your default user directory is "/home/raigo/.pywikibot"
 How to proceed? ([K]eep [c]hange) 
-Do you want to copy user files from an existing pywikipedia installation? n
-Create user-config.py file? Required for running bots ([y]es, [N]o) y
+Do you want to copy user files from an existing pywikipedia 
+installation? n
+Create user-config.py file? Required for running bots ([y]es,
+ [N]o) y
 1: anarchopedia
 2: battlestarwiki
 [...]
@@ -27,16 +30,19 @@ Create user-config.py file? Required for running bots ([y]es, [N]o) y
 [...]
 33: wiktionary
 34: wowwiki
-Select family of sites we are working on, just enter the number not name (default: wikipedia): 
+Select family of sites we are working on, just enter the number 
+not name (default: wikipedia): 
 This is the list of known language(s):
 ab ace [...] es et eu [...] zh-yue zu
-The language code of the site we're working on (default: 'en'): et
+The language code of the site we're working on (default: 'en'):
+ et
 Username (et wikipedia): AnalyseBot
 Which variant of user_config.py:
 [S]mall or [E]xtended (with further information)? S
 Do you want to add any other projects? (y/N)
 '/home/raigo/.pywikibot/user-config.py' written.
-Create user-fixes.py file? Optional and for advanced users ([y]es, [N]o) 
+Create user-fixes.py file? Optional and for advanced users
+ ([y]es, [N]o) 
 \end{verbatim}
 Questions without answers use the default answer by pressing Enter.
 

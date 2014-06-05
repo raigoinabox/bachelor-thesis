@@ -13,6 +13,11 @@ could be moved and manipulated more easily. Variables are pointers to data. They
 point to the location of the data in the memory which can be then easily
 retrieved.
 
+% XXX For now this fixes, that the below example isn't cut by the figure. Later,
+% after everything above has been written, test if this is still necessary.
+
+\clearpage
+
 Python procedures look like this:
 \begin{verbatim}
 >>> def fib(n):    # write Fibonacci series up to n
@@ -36,7 +41,7 @@ Python doesn't make a comparison between functions and procedures.
 
 Each file in python is a module with the same name as the filename, except without the \texttt{.py} extension. Each module can import another module or every object in another modules namespace with the \texttt{import} command. When the import command is evaluated, the whole file is evaluated once. A directory can also be a module if it contains a \texttt{\_\_init\_\_.py} file. In that case the module is initialised with the \texttt{\_\_init\_\_.py} file and it's namespace contains the file modules in the directory.
 
-% XXX Wrong. cite and uncomment?
+% XXX Cite
 
 % Procedures in Python are qcalled functions, because they can return one or
 % multiple values, however if a return value isn't specified, it returns the
@@ -86,7 +91,7 @@ special method, that is called when a new instance is being created from the
 object. Inheritance works by remembering the inheritance line and then searching
 for the methods in the right class.
 
-An interface is a a class that has no fields and all its methods are public. All
+An interface is a class that has no fields and all its methods are public. All
 of the methods are abstract methods, meaning that the methods have no content or
 implementation. A class can usually implement multiple interfaces but inherit
 from only one class. One can't make a instance of an interface, there needs to
@@ -126,7 +131,7 @@ recursively and so on. The object class is the superclass of every class. If
 there are no brackets or the brackets are empty, then the object class is an
 implicit superclass.
 
-% XXX cite to unccmment.
+% XXX cite.
 
 % Prototype-based programming is more used by dynamic languages. It keeps the
 % design of the language minimal by having no wrappers around objects and their

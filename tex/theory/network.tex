@@ -2,9 +2,25 @@ Client is process that requires some service. Server offers that service. The cl
 
 Extensible Markup Language (XML) is a protocol to describe data. It tries to nest data between descriptive tags. The tags can be nested and the tags can have attributes. The tags are not preset, so every user can design it's own way of presenting data. The syntax of a XML tag is \texttt{<tag attribute1=“value1“ attribute2=“value2“>data</tag>}. A tag can't have the same attribute with different values. data can be normal text or more tags. \texttt{<tag />} is shorthand for \texttt{<tag></tag>} for when the user doesn't have data to insert.
 
-The HTTP response also splits into a header and content. Inside the content is usually the requested data. A browser is an application that sends HTTP requests to servers and parses and visualises the response to the user. To help with the visualisation and interactiveness of the pages, HTML was created. HTML is an Extensible Markup Language (XML) where the tags are focused on giving text some form of context. For example, the a is a tag for a link and the \texttt{h1} is a tag for a level 1 header. The browser also parses the HTML into visual cues and interactions with the user.
+The HTTP response also splits into a header and content. Inside the content is
+usually the requested data. A browser is an application that sends HTTP requests
+to servers and parses and visualises the response to the user. To help with the
+visualisation and interactiveness of the pages, HTML was created. HTML is an
+Extensible Markup Language (XML) where the tags are focused on giving text some
+form of context. For example, the a is a tag for a link and the \texttt{h1} is a
+tag for a level 1 header. The browser also parses the HTML into visual cues and
+interactions with the user.
 
-Often the tags in HTML aren't enough. For that there is JavaScript (JS). JavaScript is a dynamic general-purpose programming language. JavaScript works by registering a JavaScript function with an HTML event, so that when that event is fired, that JavaScript function is run. JavaScript interacts with the user by changing the current HTML the user is seeing. Because JavaScript is a general-purpose programming language, unlike HTML, any arbitrary calculation is possible. JavaScript uses Asynchronous JavaScript and XML (AJAX) to send HTTP requests to outside servers. Despite the name, the returned format doesn't have to be XML.
+HTML, however, lacks the ability change the HTML tags the user is currently
+seeing. This means, the programmer is unable to interact with the user. For that
+purpose there exists JavaScript (JS). JavaScript is a dynamic general-purpose
+programming language. JavaScript works by registering a JavaScript function with an HTML
+event, so that when that event is fired, that JavaScript function is run.
+JavaScript interacts with the user by changing the current HTML the user is
+seeing. Because JavaScript is a general-purpose programming language, unlike
+HTML, any arbitrary calculation is possible. JavaScript uses Asynchronous
+JavaScript and XML (AJAX) to send HTTP requests to outside servers. Despite the
+name, the returned format doesn't have to be XML.
 
 HTML pages are purely intended for browsers to parse and a human to see. For an
 another application to get data from a HTML page, it has to web scrape. Web
