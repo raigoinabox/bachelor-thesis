@@ -7,10 +7,7 @@ argument is \verb;train;, then the command will only retrain the machine
 learning algorithm. If the argument is \verb;find;, the command will only search
 for good pages using the result of the last retraining. 
 
-% TODO, tee nii, et ma lihtsalt prindin ükshaaval kõikide lehtede url'id, mis ma
-% leian heana, terminalile ja ei ole vaja salvestada pickle formaadis faili.
-% Kuigi, räägime sellest veel.
-
-After the bot has found all of the good pages, it will then write the list of
-good pages in a file named \verb;good_pages.pkl; using the Python library
-\verb;pickle; and print it out on the terminal.
+When the program finds a good page, it will print it out on the terminal in a
+URL format. After the bot has found all of the good pages, it will then write
+the list of good pages in a file named \verb;good_pages.pkl; using the Python library
+\verb;pickle;.
